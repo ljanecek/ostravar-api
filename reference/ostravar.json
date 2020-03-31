@@ -137,7 +137,15 @@
             }
           }
         },
-        "description": "Zneplatnění JWT tokenu"
+        "description": "Zneplatnění JWT tokenu",
+        "parameters": [
+          {
+            "type": "string",
+            "in": "header",
+            "name": "Authorization: Bearer <token>",
+            "required": true
+          }
+        ]
       }
     },
     "/registration": {
