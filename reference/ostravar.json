@@ -404,6 +404,47 @@
                 },
                 "userId": {
                   "type": "number"
+                },
+                "currentRound": {
+                  "type": "object",
+                  "properties": {
+                    "receiptsCont": {
+                      "type": "number"
+                    },
+                    "codesCount": {
+                      "type": "number"
+                    }
+                  }
+                },
+                "city": {
+                  "type": "string"
+                },
+                "street": {
+                  "type": "string"
+                },
+                "prizeDraw": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "date": {
+                        "type": "string"
+                      },
+                      "prize": {
+                        "type": "string"
+                      },
+                      "type": {
+                        "type": "string",
+                        "enum": [
+                          "codes",
+                          "receipts"
+                        ]
+                      },
+                      "round": {
+                        "type": "string"
+                      }
+                    }
+                  }
                 }
               },
               "required": [
