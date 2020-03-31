@@ -857,7 +857,7 @@
     },
     "/token-validation": {
       "get": {
-        "summary": "Your GET endpoint",
+        "summary": "JWT Token validation",
         "tags": [],
         "responses": {
           "200": {
@@ -869,6 +869,9 @@
                   "type": "number"
                 },
                 "message": {
+                  "type": "string"
+                },
+                "userId": {
                   "type": "string"
                 }
               }
