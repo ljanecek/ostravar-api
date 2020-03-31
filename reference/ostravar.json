@@ -92,8 +92,47 @@
               "Example": {
                 "email": "test@test.test",
                 "password": "password123",
-                "loginType": 1
+                "loginType": "email"
               }
+            },
+            "description": ""
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "email": {
+                  "type": "string"
+                },
+                "password": {
+                  "type": "string"
+                },
+                "loginType": {
+                  "type": "string",
+                  "enum": [
+                    "email",
+                    "facebook",
+                    "google"
+                  ]
+                },
+                "accessToken": {
+                  "type": "string",
+                  "description": "Facebook access token or Google access token"
+                }
+              },
+              "required": [
+                "loginType"
+              ]
+            },
+            "x-examples": {
+              "Example": {
+                "email": "test@test.test",
+                "password": "password123",
+                "loginType": 1
+              },
+              "example-2": {}
             },
             "description": ""
           },
@@ -564,6 +603,76 @@
             }
           }
         ]
+      }
+    },
+    "/registration-confirmation": {
+      "post": {
+        "summary": "Registration confirmation",
+        "operationId": "post-registration-confirmation",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "jwt": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "status": {
+                  "type": "number"
+                },
+                "description": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "hash": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        ],
+        "description": "Potvrzení emailové registrace"
+      }
+    },
+    "/code-verification": {
+      "post": {
+        "summary": "",
+        "operationId": "post-code-verification",
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/receipt-acquisition": {
+      "post": {
+        "summary": "",
+        "operationId": "post-receipt-acquisition",
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
       }
     }
   },
