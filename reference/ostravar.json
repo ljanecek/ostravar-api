@@ -56,7 +56,7 @@
             "examples": {}
           }
         },
-        "description": "Přihlášení uživatele, je potřeba na pozadí ověřit accessToken a na základě něho získat údaje o uživateli",
+        "description": "Přihlášení uživatele, je potřeba na pozadí ověřit accessToken a na základě něho získat údaje o uživateli pokud se jedná o přihlášení pomocí google nebo facebook-u",
         "parameters": [
           {
             "in": "body",
@@ -443,6 +443,62 @@
             "name": "Authorization: Bearer <token>",
             "description": "",
             "required": true
+          }
+        ]
+      }
+    },
+    "/user-update": {
+      "post": {
+        "summary": "",
+        "operationId": "post-user-update",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "status": {
+                  "type": "number"
+                },
+                "message": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "type": "string",
+            "in": "header",
+            "name": "Authorization: Bearer <token>"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "firstName": {
+                  "type": "string"
+                },
+                "lastName": {
+                  "type": "string"
+                },
+                "email": {
+                  "type": "string"
+                },
+                "password": {
+                  "type": "string"
+                },
+                "phoneNumber": {
+                  "type": "string"
+                },
+                "zipCode": {
+                  "type": "string"
+                }
+              }
+            }
           }
         ]
       }
