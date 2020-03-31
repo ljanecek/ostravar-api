@@ -21,10 +21,122 @@
         "operationId": "post-login",
         "responses": {
           "200": {
-            "description": "OK"
+            "description": "OK",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "firstName": {
+                  "type": "string"
+                },
+                "lastName": {
+                  "type": "string"
+                },
+                "email": {
+                  "type": "string"
+                },
+                "phoneNumber": {
+                  "type": "string"
+                },
+                "zipCode": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "firstName",
+                "lastName",
+                "email",
+                "phoneNumber",
+                "zipCode"
+              ]
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "error": {
+                  "type": "string"
+                },
+                "message": {
+                  "type": "string"
+                }
+              }
+            }
           }
         },
-        "description": ""
+        "description": "",
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "email": {
+                  "type": "string"
+                },
+                "password": {
+                  "type": "string"
+                },
+                "loginType": {
+                  "type": "number"
+                }
+              },
+              "required": [
+                "email",
+                "password"
+              ]
+            },
+            "x-examples": {
+              "Example": {
+                "email": "test@test.test",
+                "password": "password123",
+                "loginType": 1
+              }
+            }
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "email": {
+                  "type": "string"
+                },
+                "password": {
+                  "type": "string"
+                }
+              }
+            },
+            "x-examples": {
+              "example-1": {}
+            }
+          }
+        ]
+      }
+    },
+    "/logout": {
+      "post": {
+        "summary": "",
+        "operationId": "post-logout",
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/registration": {
+      "post": {
+        "summary": "",
+        "operationId": "post-registration",
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
       }
     }
   },
