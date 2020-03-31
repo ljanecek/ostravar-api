@@ -3,11 +3,11 @@
   "info": {
     "title": "ostravar",
     "version": "1.0",
-    "description": "Schéma vychází z JSON definice, je možné vytvářet post requesty: https://github.com/ljanecek/ostravar-api\nPo dokončení bude PRIVATE"
+    "description": "Schéma vychází z JSON definice, je možné vytvářet post requesty: https://github.com/ljanecek/ostravar-api\n\nPo dokončení bude PRIVATE"
   },
-  "host": "localhost:3000",
+  "host": "server-ats.cz",
   "schemes": [
-    "http"
+    "https"
   ],
   "produces": [
     "application/json"
@@ -917,9 +917,6 @@
     }
   },
   "definitions": {},
-  "securityDefinitions": {
-    "key": {
-      "type": "basic"
-    }
-  }
+  "securityDefinitions": {},
+  "basePath": "/api"
 }
