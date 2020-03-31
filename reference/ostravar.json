@@ -655,24 +655,89 @@
     },
     "/code-verification": {
       "post": {
-        "summary": "",
+        "summary": "Code verification",
         "operationId": "post-code-verification",
         "responses": {
           "200": {
-            "description": "OK"
+            "description": "OK",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "status": {
+                  "type": "number"
+                },
+                "message": {
+                  "type": "string"
+                }
+              }
+            }
           }
-        }
+        },
+        "parameters": [
+          {
+            "type": "string",
+            "in": "header",
+            "name": "Authorization: Bearer <token>"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "code": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        ],
+        "description": "Nahrání kódů z podvíčka (nebo jiného umístění)"
       }
     },
     "/receipt-acquisition": {
       "post": {
-        "summary": "",
+        "summary": "Receipt acquisition",
         "operationId": "post-receipt-acquisition",
         "responses": {
           "200": {
-            "description": "OK"
+            "description": "OK",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "status": {
+                  "type": "number"
+                },
+                "message": {
+                  "type": "string"
+                }
+              }
+            }
           }
-        }
+        },
+        "parameters": [
+          {
+            "type": "string",
+            "in": "header",
+            "name": "Authorization: Bearer <token>"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "code": {
+                  "type": "string"
+                },
+                "id": {
+                  "type": "number"
+                }
+              }
+            }
+          }
+        ],
+        "description": "Nahrání kódu účtenky, pavděpodobně BKP a IDkteré použijeme v databízi administrace"
       }
     }
   },
