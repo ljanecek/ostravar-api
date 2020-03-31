@@ -739,6 +739,62 @@
         ],
         "description": "Nahrání kódu účtenky, pavděpodobně BKP a IDkteré použijeme v databízi administrace"
       }
+    },
+    "/user-vote": {
+      "post": {
+        "summary": "User vote",
+        "operationId": "post-user-vote",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "status": {
+                  "type": "number"
+                },
+                "message": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "status": {
+                  "type": "number"
+                },
+                "message": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        },
+        "description": "Hlasování uživatele, ověření počtu dostupných hlasů na straně ATS",
+        "parameters": [
+          {
+            "type": "string",
+            "in": "header",
+            "name": "Authorization: Bearer <token>"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "projectId": {
+                  "type": "number"
+                }
+              }
+            }
+          }
+        ]
+      }
     }
   },
   "definitions": {},
