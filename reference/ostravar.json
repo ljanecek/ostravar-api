@@ -39,6 +39,9 @@
                 },
                 "zipCode": {
                   "type": "string"
+                },
+                "jwt": {
+                  "type": "string"
                 }
               },
               "required": [
@@ -46,7 +49,8 @@
                 "lastName",
                 "email",
                 "phoneNumber",
-                "zipCode"
+                "zipCode",
+                "jwt"
               ]
             }
           },
@@ -56,13 +60,19 @@
               "type": "object",
               "properties": {
                 "error": {
-                  "type": "string"
+                  "type": "number"
                 },
                 "message": {
-                  "type": "string"
+                  "type": "string",
+                  "example": "Invalid login information"
                 }
-              }
-            }
+              },
+              "required": [
+                "error",
+                "message"
+              ]
+            },
+            "examples": {}
           }
         },
         "description": "",
@@ -80,12 +90,20 @@
                   "type": "string"
                 },
                 "loginType": {
-                  "type": "number"
+                  "type": "string",
+                  "enum": [
+                    "email",
+                    "facebook",
+                    "google"
+                  ]
+                },
+                "accessToken": {
+                  "type": "string",
+                  "description": "Facebook access token or Google access token"
                 }
               },
               "required": [
-                "email",
-                "password"
+                "loginType"
               ]
             },
             "x-examples": {
@@ -134,7 +152,57 @@
         "operationId": "post-registration",
         "responses": {
           "200": {
-            "description": "OK"
+            "description": "OK",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "jwt": {
+                  "type": "string"
+                },
+                "zipCode": {
+                  "type": "string"
+                },
+                "phoneNumber": {
+                  "type": "string"
+                },
+                "email": {
+                  "type": "string"
+                },
+                "lastName": {
+                  "type": "string"
+                },
+                "firstName": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "jwt",
+                "zipCode",
+                "phoneNumber",
+                "email",
+                "lastName",
+                "firstName"
+              ]
+            }
+          },
+          "409": {
+            "description": "Conflict",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "error": {
+                  "type": "number"
+                },
+                "message": {
+                  "type": "string",
+                  "example": "This user already exists"
+                }
+              },
+              "required": [
+                "error",
+                "message"
+              ]
+            }
           }
         },
         "parameters": [
