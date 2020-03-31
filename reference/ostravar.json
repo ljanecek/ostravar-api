@@ -496,6 +496,12 @@
                 },
                 "zipCode": {
                   "type": "string"
+                },
+                "city": {
+                  "type": "string"
+                },
+                "street": {
+                  "type": "string"
                 }
               }
             }
