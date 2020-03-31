@@ -25,41 +25,22 @@
             "schema": {
               "type": "object",
               "properties": {
-                "firstName": {
-                  "type": "string"
-                },
-                "lastName": {
-                  "type": "string"
-                },
-                "email": {
-                  "type": "string"
-                },
-                "phoneNumber": {
-                  "type": "string"
-                },
-                "zipCode": {
-                  "type": "string"
-                },
                 "jwt": {
                   "type": "string"
                 }
               },
               "required": [
-                "firstName",
-                "lastName",
-                "email",
-                "phoneNumber",
-                "zipCode",
                 "jwt"
               ]
-            }
+            },
+            "examples": {}
           },
           "401": {
             "description": "Unauthorized",
             "schema": {
               "type": "object",
               "properties": {
-                "error": {
+                "status": {
                   "type": "number"
                 },
                 "message": {
@@ -68,14 +49,14 @@
                 }
               },
               "required": [
-                "error",
+                "status",
                 "message"
               ]
             },
             "examples": {}
           }
         },
-        "description": "",
+        "description": "Přihlášení uživatele, je potřeba na pozadí ověřit accessToken a na základě něho získat údaje o uživateli",
         "parameters": [
           {
             "in": "body",
@@ -112,7 +93,8 @@
                 "password": "password123",
                 "loginType": 1
               }
-            }
+            },
+            "description": ""
           },
           {
             "in": "body",
@@ -158,30 +140,10 @@
               "properties": {
                 "jwt": {
                   "type": "string"
-                },
-                "zipCode": {
-                  "type": "string"
-                },
-                "phoneNumber": {
-                  "type": "string"
-                },
-                "email": {
-                  "type": "string"
-                },
-                "lastName": {
-                  "type": "string"
-                },
-                "firstName": {
-                  "type": "string"
                 }
               },
               "required": [
-                "jwt",
-                "zipCode",
-                "phoneNumber",
-                "email",
-                "lastName",
-                "firstName"
+                "jwt"
               ]
             }
           },
@@ -190,7 +152,7 @@
             "schema": {
               "type": "object",
               "properties": {
-                "error": {
+                "status": {
                   "type": "number"
                 },
                 "message": {
@@ -199,7 +161,7 @@
                 }
               },
               "required": [
-                "error",
+                "status",
                 "message"
               ]
             }
@@ -260,7 +222,173 @@
               ]
             }
           }
-        ]
+        ],
+        "description": "Registrace uživatele pomocí emailu"
+      }
+    },
+    "/reset-password": {
+      "post": {
+        "summary": "",
+        "operationId": "post-reset-password",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "status": {
+                  "type": "number",
+                  "default": 1
+                },
+                "message": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "status",
+                "message"
+              ]
+            },
+            "examples": {}
+          },
+          "401": {
+            "description": "Unauthorized",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "status": {
+                  "type": "number",
+                  "default": 0
+                },
+                "message": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "status",
+                "message"
+              ]
+            }
+          }
+        },
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "email": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        ],
+        "description": "Odeslání emailu s unikátním hashem obsahující platnost: 2 hodiny"
+      }
+    },
+    "/update-password": {
+      "post": {
+        "summary": "",
+        "operationId": "post-update-password",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "status": {
+                  "type": "number",
+                  "default": 1
+                },
+                "message": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "status",
+                "message"
+              ]
+            },
+            "examples": {}
+          },
+          "401": {
+            "description": "Unauthorized",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "status": {
+                  "type": "number"
+                },
+                "message": {
+                  "type": "string",
+                  "default": "Has is not valid"
+                }
+              },
+              "required": [
+                "status",
+                "message"
+              ]
+            }
+          }
+        },
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "newPassword": {
+                  "type": "string"
+                },
+                "hash": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "newPassword",
+                "hash"
+              ]
+            }
+          }
+        ],
+        "description": "Změna hesla nepřihlášeného uživatele"
+      }
+    },
+    "/user-data": {
+      "get": {
+        "summary": "",
+        "operationId": "get-user-data",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "zipCode": {
+                  "type": "string"
+                },
+                "phoneNumber": {
+                  "type": "string"
+                },
+                "email": {
+                  "type": "string"
+                },
+                "lastName": {
+                  "type": "string"
+                },
+                "firstName": {
+                  "type": "string"
+                },
+                "userId": {
+                  "type": "number"
+                }
+              }
+            }
+          }
+        }
       }
     }
   },
