@@ -854,6 +854,66 @@
           }
         ]
       }
+    },
+    "/token-validation": {
+      "get": {
+        "summary": "Your GET endpoint",
+        "tags": [],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "status": {
+                  "type": "number"
+                },
+                "message": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "status": {
+                  "type": "number"
+                },
+                "message": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        },
+        "operationId": "get-token-validation",
+        "parameters": [
+          {
+            "type": "string",
+            "in": "header",
+            "name": "Application Key"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "jwt": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "jwt"
+              ]
+            },
+            "description": ""
+          }
+        ]
+      }
     }
   },
   "definitions": {},
