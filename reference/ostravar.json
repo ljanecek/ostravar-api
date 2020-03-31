@@ -2,7 +2,8 @@
   "swagger": "2.0",
   "info": {
     "title": "ostravar",
-    "version": "1.0"
+    "version": "1.0",
+    "description": "Schéma vychází z JSON definice, je možné vytvářet post requesty: https://github.com/ljanecek/ostravar-api\nPo dokončení bude PRIVATE"
   },
   "host": "localhost:3000",
   "schemes": [
@@ -17,7 +18,7 @@
   "paths": {
     "/login": {
       "post": {
-        "summary": "",
+        "summary": "Login",
         "operationId": "post-login",
         "responses": {
           "200": {
@@ -119,7 +120,7 @@
     },
     "/logout": {
       "post": {
-        "summary": "",
+        "summary": "Logout",
         "operationId": "post-logout",
         "responses": {
           "200": {
@@ -150,7 +151,7 @@
     },
     "/registration": {
       "post": {
-        "summary": "",
+        "summary": "Registration",
         "operationId": "post-registration",
         "responses": {
           "200": {
@@ -248,7 +249,7 @@
     },
     "/reset-password": {
       "post": {
-        "summary": "",
+        "summary": "Request reset password",
         "operationId": "post-reset-password",
         "responses": {
           "200": {
@@ -310,7 +311,7 @@
     },
     "/update-password": {
       "post": {
-        "summary": "",
+        "summary": "Update password",
         "operationId": "post-update-password",
         "responses": {
           "200": {
@@ -379,7 +380,7 @@
     },
     "/user-data": {
       "get": {
-        "summary": "",
+        "summary": "Get user data",
         "operationId": "get-user-data",
         "responses": {
           "200": {
@@ -407,6 +408,10 @@
                 },
                 "currentRound": {
                   "type": "object",
+                  "required": [
+                    "receiptsCont",
+                    "codesCount"
+                  ],
                   "properties": {
                     "receiptsCont": {
                       "type": "number"
@@ -428,7 +433,8 @@
                     "type": "object",
                     "properties": {
                       "date": {
-                        "type": "string"
+                        "type": "string",
+                        "format": "date-time"
                       },
                       "prize": {
                         "type": "string"
@@ -443,7 +449,13 @@
                       "round": {
                         "type": "string"
                       }
-                    }
+                    },
+                    "required": [
+                      "date",
+                      "prize",
+                      "type",
+                      "round"
+                    ]
                   }
                 }
               },
@@ -453,7 +465,11 @@
                 "email",
                 "lastName",
                 "firstName",
-                "userId"
+                "userId",
+                "currentRound",
+                "city",
+                "street",
+                "prizeDraw"
               ]
             }
           },
@@ -490,7 +506,7 @@
     },
     "/user-update": {
       "post": {
-        "summary": "",
+        "summary": "Update user data",
         "operationId": "post-user-update",
         "responses": {
           "200": {
