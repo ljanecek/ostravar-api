@@ -475,9 +475,6 @@
                         "type": "string",
                         "format": "date-time"
                       },
-                      "prize": {
-                        "type": "string"
-                      },
                       "type": {
                         "type": "string",
                         "enum": [
@@ -491,9 +488,29 @@
                     },
                     "required": [
                       "date",
-                      "prize",
                       "type",
                       "round"
+                    ]
+                  }
+                },
+                "votes": {
+                  "type": [
+                    "string",
+                    "array"
+                  ],
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "projectId": {
+                        "type": "number"
+                      },
+                      "count": {
+                        "type": "number"
+                      }
+                    },
+                    "required": [
+                      "projectId",
+                      "count"
                     ]
                   }
                 }
@@ -508,7 +525,8 @@
                 "currentRound",
                 "city",
                 "street",
-                "prizeDraw"
+                "prizeDraw",
+                "votes"
               ]
             }
           },
@@ -567,7 +585,8 @@
           {
             "type": "string",
             "in": "header",
-            "name": "Authorization: Bearer <token>"
+            "name": "Authorization: Bearer <token>",
+            "required": true
           },
           {
             "in": "body",
@@ -677,7 +696,8 @@
           {
             "type": "string",
             "in": "header",
-            "name": "Authorization: Bearer <token>"
+            "name": "Authorization: Bearer <token>",
+            "required": true
           },
           {
             "in": "body",
@@ -719,7 +739,9 @@
           {
             "type": "string",
             "in": "header",
-            "name": "Authorization: Bearer <token>"
+            "name": "Application Key",
+            "required": true,
+            "description": ""
           },
           {
             "in": "body",
@@ -730,14 +752,17 @@
                 "code": {
                   "type": "string"
                 },
-                "id": {
+                "receiptId": {
+                  "type": "number"
+                },
+                "userId": {
                   "type": "number"
                 }
               }
             }
           }
         ],
-        "description": "Nahrání kódu účtenky, pavděpodobně BKP a IDkteré použijeme v databízi administrace"
+        "description": "Nahrání kódu účtenky, bude se provádět z backendu, takže tento endpoint je otevřený, zabezpečený pomocí Application Key"
       }
     },
     "/user-vote": {
@@ -774,12 +799,13 @@
             }
           }
         },
-        "description": "Hlasování uživatele, ověření počtu dostupných hlasů na straně ATS",
+        "description": "Hlasování uživatele, ověření počtu dostupných hlasů na straně ATS, ATS by mělo zachovávat ID hlasů",
         "parameters": [
           {
             "type": "string",
             "in": "header",
-            "name": "Authorization: Bearer <token>"
+            "name": "Authorization: Bearer <token>",
+            "required": true
           },
           {
             "in": "body",
@@ -790,8 +816,41 @@
                 "projectId": {
                   "type": "number"
                 }
+              },
+              "required": [
+                "projectId"
+              ]
+            }
+          }
+        ]
+      }
+    },
+    "/user-remove": {
+      "delete": {
+        "summary": "",
+        "operationId": "delete-user-remove",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "status": {
+                  "type": "number"
+                },
+                "message": {
+                  "type": "string"
+                }
               }
             }
+          }
+        },
+        "parameters": [
+          {
+            "type": "string",
+            "in": "header",
+            "name": "Authorization: Bearer <token>",
+            "required": true
           }
         ]
       }
