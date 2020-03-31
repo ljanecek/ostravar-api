@@ -136,7 +136,63 @@
           "200": {
             "description": "OK"
           }
-        }
+        },
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "firstName": {
+                  "type": "string"
+                },
+                "lastName": {
+                  "type": "string"
+                },
+                "email": {
+                  "type": "string"
+                },
+                "password": {
+                  "type": "string"
+                },
+                "passwordConfirmation": {
+                  "type": "string"
+                },
+                "phoneNumber": {
+                  "type": "string"
+                },
+                "zipCode": {
+                  "type": "string"
+                },
+                "agreements": {
+                  "type": "object",
+                  "required": [
+                    "18years",
+                    "personalData"
+                  ],
+                  "properties": {
+                    "18years": {
+                      "type": "boolean"
+                    },
+                    "personalData": {
+                      "type": "boolean"
+                    },
+                    "commercial": {
+                      "type": "boolean"
+                    }
+                  }
+                }
+              },
+              "required": [
+                "email",
+                "password",
+                "passwordConfirmation",
+                "agreements"
+              ]
+            }
+          }
+        ]
       }
     }
   },
