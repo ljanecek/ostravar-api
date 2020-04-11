@@ -26,12 +26,12 @@
             "schema": {
               "type": "object",
               "properties": {
-                "jwt": {
-                  "type": "string"
+                "userId": {
+                  "type": "number"
                 }
               },
               "required": [
-                "jwt"
+                "userId"
               ]
             },
             "examples": {}
@@ -70,23 +70,8 @@
                 },
                 "password": {
                   "type": "string"
-                },
-                "loginType": {
-                  "type": "string",
-                  "enum": [
-                    "email",
-                    "facebook",
-                    "google"
-                  ]
-                },
-                "accessToken": {
-                  "type": "string",
-                  "description": "Facebook access token or Google access token"
                 }
-              },
-              "required": [
-                "loginType"
-              ]
+              }
             },
             "x-examples": {
               "Example": {
@@ -153,36 +138,11 @@
             "x-examples": {
               "example-1": {}
             }
-          }
-        ]
-      }
-    },
-    "/logout": {
-      "post": {
-        "summary": "Logout",
-        "operationId": "post-logout",
-        "responses": {
-          "200": {
-            "description": "OK",
-            "schema": {
-              "type": "object",
-              "properties": {
-                "status": {
-                  "type": "number"
-                },
-                "message": {
-                  "type": "string"
-                }
-              }
-            }
-          }
-        },
-        "description": "Zneplatnění JWT tokenu",
-        "parameters": [
+          },
           {
             "type": "string",
             "in": "header",
-            "name": "Authorization: Bearer <token>",
+            "name": "Application Key",
             "required": true
           }
         ]
@@ -257,17 +217,7 @@
                 },
                 "agreements": {
                   "type": "object",
-                  "required": [
-                    "18years",
-                    "personalData"
-                  ],
                   "properties": {
-                    "18years": {
-                      "type": "boolean"
-                    },
-                    "personalData": {
-                      "type": "boolean"
-                    },
                     "commercial": {
                       "type": "boolean"
                     }
@@ -281,6 +231,12 @@
                 "agreements"
               ]
             }
+          },
+          {
+            "type": "string",
+            "in": "header",
+            "name": "Application Key",
+            "required": true
           }
         ],
         "description": "Registrace uživatele pomocí emailu"
@@ -343,6 +299,13 @@
                 }
               }
             }
+          },
+          {
+            "type": "string",
+            "in": "header",
+            "name": "Application Key",
+            "description": "",
+            "required": true
           }
         ],
         "description": "Odeslání emailu s unikátním hashem obsahující platnost: 2 hodiny"
@@ -412,6 +375,12 @@
                 "hash"
               ]
             }
+          },
+          {
+            "type": "string",
+            "in": "header",
+            "name": "Application Key",
+            "required": true
           }
         ],
         "description": "Změna hesla nepřihlášeného uživatele"
@@ -471,10 +440,6 @@
                   "items": {
                     "type": "object",
                     "properties": {
-                      "date": {
-                        "type": "string",
-                        "format": "date-time"
-                      },
                       "type": {
                         "type": "string",
                         "enum": [
@@ -484,10 +449,12 @@
                       },
                       "round": {
                         "type": "string"
+                      },
+                      "prizeId": {
+                        "type": "number"
                       }
                     },
                     "required": [
-                      "date",
                       "type",
                       "round"
                     ]
@@ -513,6 +480,9 @@
                       "count"
                     ]
                   }
+                },
+                "freeVotes": {
+                  "type": "number"
                 }
               },
               "required": [
@@ -554,9 +524,21 @@
           {
             "type": "string",
             "in": "header",
-            "name": "Authorization: Bearer <token>",
+            "name": "Application Key",
             "description": "",
             "required": true
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "userId": {
+                  "type": "number"
+                }
+              }
+            }
           }
         ]
       }
@@ -585,7 +567,7 @@
           {
             "type": "string",
             "in": "header",
-            "name": "Authorization: Bearer <token>",
+            "name": "Application Key",
             "required": true
           },
           {
@@ -598,9 +580,6 @@
                   "type": "string"
                 },
                 "lastName": {
-                  "type": "string"
-                },
-                "email": {
                   "type": "string"
                 },
                 "password": {
@@ -617,8 +596,14 @@
                 },
                 "street": {
                   "type": "string"
+                },
+                "userId": {
+                  "type": "number"
                 }
-              }
+              },
+              "required": [
+                "userId"
+              ]
             }
           }
         ]
@@ -634,7 +619,10 @@
             "schema": {
               "type": "object",
               "properties": {
-                "jwt": {
+                "status": {
+                  "type": "number"
+                },
+                "message": {
                   "type": "string"
                 }
               }
@@ -667,6 +655,12 @@
                 }
               }
             }
+          },
+          {
+            "type": "string",
+            "in": "header",
+            "name": "Application Key",
+            "required": true
           }
         ],
         "description": "Potvrzení emailové registrace"
@@ -696,7 +690,7 @@
           {
             "type": "string",
             "in": "header",
-            "name": "Authorization: Bearer <token>",
+            "name": "Application Key",
             "required": true
           },
           {
@@ -707,8 +701,15 @@
               "properties": {
                 "code": {
                   "type": "string"
+                },
+                "userId": {
+                  "type": "number"
                 }
-              }
+              },
+              "required": [
+                "code",
+                "userId"
+              ]
             }
           }
         ],
@@ -804,7 +805,7 @@
           {
             "type": "string",
             "in": "header",
-            "name": "Authorization: Bearer <token>",
+            "name": "Application Key",
             "required": true
           },
           {
@@ -815,10 +816,14 @@
               "properties": {
                 "projectId": {
                   "type": "number"
+                },
+                "userId": {
+                  "type": "number"
                 }
               },
               "required": [
-                "projectId"
+                "projectId",
+                "userId"
               ]
             }
           }
@@ -849,55 +854,8 @@
           {
             "type": "string",
             "in": "header",
-            "name": "Authorization: Bearer <token>",
+            "name": "Application Key",
             "required": true
-          }
-        ]
-      }
-    },
-    "/token-validation": {
-      "get": {
-        "summary": "JWT Token validation",
-        "tags": [],
-        "responses": {
-          "200": {
-            "description": "OK",
-            "schema": {
-              "type": "object",
-              "properties": {
-                "status": {
-                  "type": "number"
-                },
-                "message": {
-                  "type": "string"
-                },
-                "userId": {
-                  "type": "string"
-                }
-              }
-            }
-          },
-          "401": {
-            "description": "Unauthorized",
-            "schema": {
-              "type": "object",
-              "properties": {
-                "status": {
-                  "type": "number"
-                },
-                "message": {
-                  "type": "string"
-                }
-              }
-            }
-          }
-        },
-        "operationId": "get-token-validation",
-        "parameters": [
-          {
-            "type": "string",
-            "in": "header",
-            "name": "Application Key"
           },
           {
             "in": "body",
@@ -905,15 +863,11 @@
             "schema": {
               "type": "object",
               "properties": {
-                "jwt": {
-                  "type": "string"
+                "userId": {
+                  "type": "number"
                 }
-              },
-              "required": [
-                "jwt"
-              ]
-            },
-            "description": ""
+              }
+            }
           }
         ]
       }
