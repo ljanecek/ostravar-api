@@ -750,14 +750,22 @@
             "schema": {
               "type": "object",
               "properties": {
-                "code": {
-                  "type": "string"
-                },
-                "receiptId": {
-                  "type": "number"
-                },
-                "userId": {
-                  "type": "number"
+                "receipts": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "code": {
+                        "type": "string"
+                      },
+                      "receiptId": {
+                        "type": "number"
+                      },
+                      "userId": {
+                        "type": "string"
+                      }
+                    }
+                  }
                 }
               }
             }
