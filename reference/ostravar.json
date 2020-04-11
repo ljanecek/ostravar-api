@@ -206,9 +206,6 @@
                 "password": {
                   "type": "string"
                 },
-                "passwordConfirmation": {
-                  "type": "string"
-                },
                 "phoneNumber": {
                   "type": "string"
                 },
@@ -227,7 +224,6 @@
               "required": [
                 "email",
                 "password",
-                "passwordConfirmation",
                 "agreements"
               ]
             }
@@ -461,10 +457,7 @@
                   }
                 },
                 "votes": {
-                  "type": [
-                    "string",
-                    "array"
-                  ],
+                  "type": "array",
                   "items": {
                     "type": "object",
                     "properties": {
