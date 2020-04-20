@@ -456,24 +456,6 @@
                     ]
                   }
                 },
-                "votes": {
-                  "type": "array",
-                  "items": {
-                    "type": "object",
-                    "properties": {
-                      "projectId": {
-                        "type": "number"
-                      },
-                      "count": {
-                        "type": "number"
-                      }
-                    },
-                    "required": [
-                      "projectId",
-                      "count"
-                    ]
-                  }
-                },
                 "freeVotes": {
                   "type": "number"
                 }
@@ -488,8 +470,7 @@
                 "currentRound",
                 "city",
                 "street",
-                "prizeDraw",
-                "votes"
+                "prizeDraw"
               ]
             }
           },
@@ -871,6 +852,86 @@
             }
           }
         ]
+      }
+    },
+    "/receipt-notification": {
+      "post": {
+        "summary": "Notifikace o nahrátí účtenky",
+        "operationId": "post-receipt-notification",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "id": {
+                  "type": "number"
+                }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "userId": {
+                  "type": "number"
+                }
+              }
+            }
+          },
+          {
+            "type": "string",
+            "in": "header",
+            "name": "Application Key"
+          }
+        ],
+        "description": "Notifikace odeslaná do ATS otom, že uživatel nahrál účtenku, na základě které vrátí ID účtenky, které se bude posílat v metodě /receipt-acquisition. ATS přidá body k hlsování uživateli, které získáme pomocí metody /user-data. Uživatel bude moct hlasovat."
+      }
+    },
+    "/projects": {
+      "get": {
+        "summary": "Your GET endpoint",
+        "tags": [],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "projectId": {
+                    "type": "number"
+                  },
+                  "votesCount": {
+                    "type": "number"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "operationId": "get-projects",
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "userId": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        ],
+        "description": "Pokud se odešle metoda s UserID, response bude obsahovat i neschválené hlasy uživatele. Pokud se odešle bez tohoto parametru, nebude obsahovat neschválené hlasy."
       }
     }
   },
